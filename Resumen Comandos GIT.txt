@@ -1,0 +1,23 @@
+Para clonar repositorios de sólo lectura >>>
+
+# 1. Clonar (solo una vez)
+git clone httpsgithub.comInadaptados2025-3-React.git
+
+# 2. Entrar al proyecto
+cd 2025-3-React
+
+# 3. Revisar la rama principal
+git branch -a
+
+# 4. Bajar actualizaciones (cada vez que el profe suba algo nuevo)
+git pull origin main
+
+
+Para subir repositorio local a GitHUb >>>
+cd D:\MyDocuments\2025.Inadaptados\Nars2025-3-React
+git init
+git remote add origin https://github.com/TU_USUARIO/Nars2025-3-React.git
+git add .
+git commit -m "Primer commit"
+git branch -M main ??????????
+git push
