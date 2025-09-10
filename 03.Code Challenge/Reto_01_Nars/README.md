@@ -160,7 +160,7 @@ export const products = [
     id: 1,
     name: "iPhone 15 Pro",
     price: 999,
-    image: "https://via.placeholder.com/300x200?text=iPhone+15+Pro",
+    image: "https://es.digitaltrends.com/wp-content/uploads/2023/09/apple-iphone-15-vs-iphone-15-pro.jpg",
     stock: 5,
   },
   {
@@ -350,10 +350,10 @@ reto-atomos-ecommerce/
 │   └── manifest.json
 ├── src/
 │   ├── components/
-│   │   ├── Button.jsx
-│   │   ├── Button.css
-│   │   ├── Input.jsx
-│   │   ├── Input.css
+│   │   ├── Button.jsx ok
+│   │   ├── Button.css ok
+│   │   ├── Input.jsx ok 
+│   │   ├── Input.css ok 
 │   │   ├── Badge.jsx
 │   │   ├── Badge.css
 │   │   ├── ProductCard.jsx
