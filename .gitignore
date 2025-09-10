@@ -1,0 +1,20 @@
+# Ignora node_modules en cualquier nivel
+**/node_modules/
+
+# (Opcionales recomendados)
+**/build/
+**/coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Variables de entorno
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
