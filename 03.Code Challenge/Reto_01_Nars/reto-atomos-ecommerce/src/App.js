@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useMemo, useState } from "react";
 import "./App.css";
 import ProductCard from "./components/ProductCard";

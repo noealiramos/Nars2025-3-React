@@ -1,4 +1,3 @@
-// src/components/ProductCard.jsx
 import React from "react";
 import "./ProductCard.css";
 import Badge from "./Badge";

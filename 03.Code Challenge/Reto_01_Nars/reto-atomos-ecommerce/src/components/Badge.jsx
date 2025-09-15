@@ -1,4 +1,3 @@
-// src/components/Badge.jsx
 import React from "react";
 import "./Badge.css";
 import PropTypes from "prop-types";

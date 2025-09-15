@@ -1,3 +1,4 @@
+import Layout from "../../layout/Layout";
 import BannerCarousel from "../BannerCarousel/BannerCarousel";
 
 function App() {
@@ -45,11 +46,9 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <main>
-        <BannerCarousel banners={images} />
-      </main>
-    </div>
+    <Layout>
+      <BannerCarousel banners={images} />
+    </Layout>
   );
 }
 

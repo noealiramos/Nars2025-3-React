@@ -1,4 +1,3 @@
-// src/components/Input.jsx
 import React from "react";
 import "./Input.css";
 import PropTypes from "prop-types";
