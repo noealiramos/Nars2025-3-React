@@ -1,0 +1,95 @@
+├─ README.md
+├─ package-lock.json
+├─ package.json
+├─ public
+│  ├─ ecommerce.ico
+│  ├─ favicon.ico
+│  ├─ img
+│  │  └─ products
+│  │     ├─ Dell XPS 13.jpeg
+│  │     ├─ Google Pixel 7.jpg
+│  │     ├─ Lenovo Legion 7.avif
+│  │     ├─ MacBook Air M2.jpg
+│  │     ├─ Microsoft Surface Laptop 5.jpg
+│  │     ├─ Samsung Galaxy S23.jpg
+│  │     ├─ Sony WH-1000XM5.avif
+│  │     ├─ airpodspro2.jpeg
+│  │     ├─ applewatch9.png
+│  │     ├─ iPad Pro 12.9.jpeg
+│  │     ├─ iPhone 14 Pro.jpg
+│  │     └─ placeholder.svg
+│  ├─ index.html
+│  ├─ logo192.png
+│  ├─ logo512.png
+│  ├─ manifest.json
+│  └─ robots.txt
+└─ src
+   ├─ components
+   │  ├─ App
+   │  │  ├─ App.css
+   │  │  ├─ App.jsx
+   │  │  └─ index.js
+   │  ├─ BannerCarousel
+   │  │  ├─ BannerCarousel.css
+   │  │  ├─ BannerCarousel.jsx
+   │  │  └─ index.js
+   │  ├─ ProductCard
+   │  │  ├─ ProductCard.css
+   │  │  ├─ ProductCard.jsx
+   │  │  └─ index.js
+   │  └─ common
+   │     ├─ Badge
+   │     │  ├─ Badge.css
+   │     │  ├─ Badge.jsx
+   │     │  └─ index.js
+   │     ├─ Button
+   │     │  ├─ Button.css
+   │     │  ├─ Button.jsx
+   │     │  └─ index.js
+   │     ├─ Icon
+   │     │  ├─ Icon.css
+   │     │  ├─ Icon.jsx
+   │     │  └─ index.js
+   │     └─ Input
+   │        ├─ Input.css
+   │        ├─ Input.jsx
+   │        └─ index.js
+   ├─ context
+   │  └─ .gitkeep
+   ├─ data
+   │  ├─ categories.json
+   │  ├─ homeImages.json
+   │  ├─ products.json
+   │  └─ users.json
+   ├─ index.css
+   ├─ index.js
+   ├─ layout
+   │  ├─ Breadcrumb
+   │  │  ├─ Breadcrumb.css
+   │  │  └─ Breadcrumb.jsx
+   │  ├─ Footer
+   │  │  ├─ Footer.css
+   │  │  └─ Footer.jsx
+   │  ├─ Header
+   │  │  ├─ Header.css
+   │  │  └─ Header.jsx
+   │  ├─ Layout.css
+   │  ├─ Layout.jsx
+   │  ├─ Navigation
+   │  │  ├─ Navigation.css
+   │  │  └─ Navigation.jsx
+   │  └─ Newsletter
+   │     ├─ Newsletter.css
+   │     └─ Newsletter.jsx
+   ├─ logo.svg
+   ├─ pages
+   │  ├─ CategoryPage.jsx
+   │  └─ Home.jsx
+   ├─ reportWebVitals.js
+   ├─ services
+   │  └─ productService.js
+   ├─ setupTests.js
+   ├─ styles
+   │  └─ .gitkeep
+   └─ utils
+      └─ .gitkeep
