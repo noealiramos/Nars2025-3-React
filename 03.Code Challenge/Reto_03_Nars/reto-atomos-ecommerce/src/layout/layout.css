@@ -1,0 +1,42 @@
+.site-header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #eee;}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;max-width:1200px;margin:0 auto;}
+.brand{font-weight:800;text-decoration:none;color:#222;letter-spacing:.4px;}
+.nav{display:flex;gap:.75rem;}
+.nav-link{text-decoration:none;color:#666;padding:.25rem .5rem;border-radius:8px;transition:background .2s ease,color .2s ease;}
+.nav-link:hover{background:#f0f2f5;color:#222;}
+.nav-link.active{color:#fff;background:#007bff;}
+
+.main-content{min-height:calc(100vh - 140px);padding:1rem 0 2rem;}
+.site-footer{background:#fff;border-top:1px solid #eee;}
+.footer-inner{padding:1rem;text-align:center;max-width:1200px;margin:0 auto;}
+.muted{color:#666;font-size:.9rem;}
+
+
+
+
+/* === Header rojo === */
+.site-header {
+  background: #e53935;            /* rojo */
+  border-bottom: none;
+}
+.brand { color: #fff; }            /* texto de la marca en blanco */
+.nav-link {
+  color: #ffe5e5;                  /* enlaces claros */
+}
+.nav-link:hover {
+  background: rgba(255,255,255,.12);
+  color: #fff;
+}
+.nav-link.active {
+  background: rgba(255,255,255,.24);
+  color: #fff;
+}
+
+/* === Footer azul === */
+.site-footer {
+  background: #1e88e5;            /* azul */
+  border-top: none;
+  color: #fff;                     /* texto principal en blanco */
+}
+.site-footer a { color: #fff; }    /* enlaces en blanco */
+.footer-inner .muted { color: #e3f2fd; } /* texto secundario claro */
