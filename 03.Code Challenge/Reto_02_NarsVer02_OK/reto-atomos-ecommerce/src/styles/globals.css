@@ -1,0 +1,4 @@
+:root{--primary:#007bff;--primary-600:#0056b3;--text:#222;--muted:#666;--bg:#f7f7f9}
+html,body,#root{height:100%}
+body{margin:0;background:var(--bg)}
+.container{max-width:1200px;margin:0 auto;padding:0 1rem}

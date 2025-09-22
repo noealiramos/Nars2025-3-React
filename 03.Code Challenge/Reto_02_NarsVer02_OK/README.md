@@ -32,12 +32,12 @@ Configurar el esqueleto del proyecto y estructura de carpetas para escalar de ma
 
 ```
 src/
-├── components/     # Componentes reutilizables
-├── pages/         # Páginas principales
-├── layout/        # Componentes de layout (Header, Footer, Layout)
-├── data/          # Datos mock y constantes
-├── services/      # Servicios y APIs
-└── context/       # Context providers
+├── components/     # Componentes reutilizables (OK)
+├── pages/         # Páginas principales (OK)
+├── layout/        # Componentes de layout (Header, Footer, Layout) (OK)
+├── data/          # Datos mock y constantes (OK)
+├── services/      # Servicios y APIs  (OK)
+└── context/       # Context providers  (OK)
 ```
 
 ---
