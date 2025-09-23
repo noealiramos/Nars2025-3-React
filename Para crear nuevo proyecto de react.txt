@@ -1,0 +1,2 @@
+para crear nuevo proyecto en react>>>
+npx create-react-app@latest ecommerce-appjoyeria (después de latest >>> va el título de la app)
