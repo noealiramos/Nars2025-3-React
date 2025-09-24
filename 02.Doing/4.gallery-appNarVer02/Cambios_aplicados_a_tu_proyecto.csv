@@ -1,0 +1,15 @@
+action,path,import
+created_css,src/layout/Layout.css,
+added_import,src/layout/Layout.jsx,./Layout.css
+created_css,src/layout/NavBar.css,
+added_import,src/layout/NavBar.jsx,./NavBar.css
+created_css,src/layout/StatusBar.css,
+added_import,src/layout/StatusBar.jsx,./StatusBar.css
+created_css,src/molecules/AlbumCard.css,
+added_import,src/molecules/AlbumCard.jsx,./AlbumCard.css
+created_css,src/molecules/PhotoCard.css,
+added_import,src/molecules/PhotoCard.jsx,./PhotoCard.css
+created_css,src/pages/albums.css,
+added_import,src/pages/albums.jsx,./albums.css
+created_css,src/pages/photos.css,
+added_import,src/pages/photos.jsx,./photos.css

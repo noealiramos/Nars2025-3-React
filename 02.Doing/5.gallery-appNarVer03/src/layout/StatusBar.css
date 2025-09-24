@@ -1,0 +1,52 @@
+/* Styles for StatusBar.jsx */
+.status-bar {
+  /* TODO: layout */
+  display: block;
+}
+
+.status-bar__container {
+  /* TODO: spacing */
+  padding: 1rem;
+}
+
+.status-bar__title {
+  /* TODO: typography */
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.status-bar__grid {
+  /* TODO: grid for images/cards */
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.status-bar__card {
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+.status-bar__media {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  border-radius: 0.5rem;
+}
+
+
+/* === style-guide: status colors === */
+.status-bar { background: var(--card-bg); color: var(--fg); border-radius: var(--radius); box-shadow: var(--shadow); }
+.status-bar__container { padding: 12px 16px; }
+.status-bar__title { color: var(--muted); font-weight: 600; }
+
+
+.status-bar{ background:var(--card-bg); border-radius:var(--radius); box-shadow:var(--shadow); }
+.status-bar__container{ padding:10px 16px; }
+.status-bar__row{ display:flex; align-items:center; justify-content:space-between; }
+.status-bar__count{ color:var(--muted); }
+
+:root{ --status-bg: #f2e4db; }
+.status-bar{ background: var(--status-bg); }

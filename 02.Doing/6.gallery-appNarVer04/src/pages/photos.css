@@ -1,0 +1,42 @@
+/* Styles for photos.jsx */
+.photos {
+  /* TODO: layout */
+  display: block;
+}
+
+.photos__container {
+  /* TODO: spacing */
+  padding: 1rem;
+}
+
+.photos__title {
+  /* TODO: typography */
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.photos__grid {
+  /* TODO: grid for images/cards */
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.photos__card {
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+.photos__media {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  border-radius: 0.5rem;
+}
+
+
+/* === style-guide: page grid === */
+.albums__grid, .photos__grid { gap: var(--gap); }
+.albums__card, .photos__card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); padding: 12px; }
