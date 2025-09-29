@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sandbox de CSS</title>
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;              /*margen - marco*/
+      background: #018cff;  /*fondo de TODO el documento*/
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: rgba(255, 0, 34, 0.829);        /* cambia el color */
+      color: rgb(255, 255, 255);           /* color del texto */
+      padding: 20px;          /* espacio interno - grueso del fondo del header*/
+      text-align: center;     /* centra el texto */
+    }
+
+    /* ===== CAJA CENTRAL ===== */
+    .caja {
+      width: 200px;           /* ancho fijo de la caja central - con este se logra el tamaño de la tarjeta */
+      margin: 40px auto;      /* centrado horizontal - separa el centro del header*/
+      padding: 20px;          /* espacio interno - con ese se genera la tarjeta */
+      background: rgb(7, 255, 139);   /*color interno de la tarjeta*/
+      border: 10px solid #d0d319; /*tamaño del marco de la etiueta y su color*/
+      border-radius: 12px;     /* esquinas redondeadas: hacia el "0">>> tarjeta con esquinas / hacia 8-10, esquinas con más redondeo */
+      text-align: center;     /* centra el TODO EL texto dentro */
+    }
+
+    .caja h2 {
+      margin-top: 0;          /* elimina espacio extra arriba del TEXTo, ojo es de un h2 */
+      color: rgb(29, 29, 219);      /*ojo, es el color del texto*/
+    }
+
+    .caja p {                     
+      margin: 10px 10;        /*espacio entre las 2 cajas de texto*/
+      padding: 10px;
+      background: rgb(72, 10, 216); /*color de la caja*/
+    }
+
+    /* ===== EJEMPLO FLEXBOX ===== */
+    .flex-center {
+      display: flex;
+      align-items: center;    /* centra vertical */
+      justify-content: center;/* centra horizontal */
+      height: 150px;          /*ancho del contenedor*/
+      background: lightblue; /*fonde contenedor*/
+      margin: 20px auto;
+      width: 80%;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: blue;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Mi Sandbox CSS de prueba</h1>
+  </header>
+
+  <div class="caja">
+    <h2>Producto</h2>
+    <p>Este es un párrafo dentro de la caja.</p>
+    <p>Puedes cambiar <b>margin</b>, <b>padding</b>, colores, etc.</p>
+  </div>
+
+  <div class="flex-center">
+    <h3>Estoy centrado con Flexbox</h3>
+  </div>
+
+  <footer>
+    <p>© 2025 Ali - Sandbox de aprendizaje</p>
+  </footer>
+
+</body>
+</html>

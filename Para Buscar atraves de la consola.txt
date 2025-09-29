@@ -1,0 +1,9 @@
+findstr /s /i "albums" *.js *.jsx
+
+
+
+Extra pro Combinación (para ver todo junto)
+dir /s /b albums.jsx Albums.jsx
+echo ==== IMPORTS ENCONTRADOS ====
+findstr /s /i "albums" *.js *.jsx
+

@@ -19,13 +19,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>🛒 Mi Tienda Online</h1>
-        <p>Reto de Componentes Atómicos</p>
+        <h1>🛒 Mi Tienda Online NARS versionRev03</h1>
+        <p>Reto de Componentes Atómicos NARS versionRev03</p>
         <div className="filters">
           <Input
             label="Buscar productos"
             type="text"
-            placeholder="Escribe aquí..."
+            placeholder="Escribe aquí el producto a buscar..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
