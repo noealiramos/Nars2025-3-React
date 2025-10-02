@@ -1,0 +1,140 @@
+.album-card {
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  background: var(--bg-primary);
+  display: flex;
+  gap: var(--spacing-xl);
+  transition: var(--transition-normal);
+  cursor: pointer;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.album-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-hover);
+}
+
+.album-preview {
+  flex-shrink: 0;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3px;
+  width: 140px;
+  height: 140px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #f0f0f0;
+}
+
+.grid-cell {
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.grid-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.album-card:hover .grid-image {
+  transform: scale(1.05);
+}
+
+.grid-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f5f5 0%, #eeeeee 100%);
+  color: #999;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.album-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 140px;
+}
+
+.album-header {
+  margin-bottom: 12px;
+}
+
+.album-title {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.3;
+}
+
+.album-description {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.album-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.album-tags {
+  display: flex;
+  gap: 8px;
+}
+
+.album-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .album-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 16px;
+  }
+
+  .image-grid {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+  }
+
+  .album-info {
+    min-height: auto;
+  }
+
+  .album-footer {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
