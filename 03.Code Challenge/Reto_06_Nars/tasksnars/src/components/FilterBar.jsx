@@ -1,11 +1,21 @@
 import React from "react";
 
-export default function FilterBar() {
+export default function FilterBar({ filter, onFilterChange }) {
+  const btn = (key, label) => (
+    <button
+      className={`btn filter-btn ${filter === key ? "active" : ""}`}
+      onClick={() => onFilterChange(key)}
+      type="button"
+    >
+      {label}
+    </button>
+  );
+
   return (
-    <nav style={{ display: "flex", gap: 8 }}>
-      <button>All</button>
-      <button>Active</button>
-      <button>Done</button>
+    <nav className="filter-bar">
+      {btn("all", "All")}
+      {btn("active", "Active")}
+      {btn("done", "Done")}
     </nav>
   );
 }

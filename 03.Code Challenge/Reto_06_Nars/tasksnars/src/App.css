@@ -34,3 +34,102 @@ h1 {
 }
 
 p { margin: 0; color: var(--muted); }
+
+
+/* ---------- Base UI ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.02s ease-in;
+}
+.btn:active { transform: translateY(1px); }
+.btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+.btn-primary {
+  background: var(--accent);
+  color: #0f172a;
+  border: none;
+}
+
+.input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: var(--text);
+}
+
+.row { display: flex; gap: 8px; }
+
+.alert {
+  color: #f87171;
+  font-size: 13px;
+  margin-left: 6px;
+}
+
+/* ---------- TodoForm ---------- */
+.todo-form { margin-top: 8px; }
+
+/* ---------- FilterBar ---------- */
+.filter-bar { display: flex; gap: 8px; margin-top: 8px; }
+.filter-btn.active {
+  background: #1f2937;
+  border-color: #475569;
+}
+
+/* ---------- TodoList ---------- */
+.todo-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+
+
+/* ---------- TodoItem ---------- */
+.todo-item {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+  background: #0b1220;
+}
+
+.todo-title {
+  margin: 0;
+  font-size: 15px;
+}
+
+.todo-title.done {
+  color: #94a3b8;
+  text-decoration: line-through;
+}
+
+.todo-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-danger {
+  background: #0f172a;
+  color: #fca5a5;
+  border: 1px solid #7f1d1d;
+}
+.btn-danger:hover { border-color: #b91c1c; }
+
+/* spacing between items */
+.todo-list li { margin-top: 8px; }
+
