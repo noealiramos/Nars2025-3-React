@@ -1,7 +1,7 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 
-export default function TodoList({ todos, onToggle, onDelete }) {
+export default function TodoList({ todos, onToggle, onDelete, onEdit }) {
   if (!todos.length) {
     return <p style={{ opacity: 0.8 }}>No tasks yet.</p>;
   }
@@ -10,7 +10,12 @@ export default function TodoList({ todos, onToggle, onDelete }) {
     <ul className="todo-list">
       {todos.map((t) => (
         <li key={t.id}>
-          <TodoItem todo={t} onToggle={onToggle} onDelete={onDelete} />
+          <TodoItem
+            todo={t}
+            onToggle={onToggle}
+            onDelete={onDelete}
+            onEdit={onEdit}
+          />
         </li>
       ))}
     </ul>
