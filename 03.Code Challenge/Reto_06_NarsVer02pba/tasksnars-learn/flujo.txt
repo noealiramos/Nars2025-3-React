@@ -1,0 +1,14 @@
+Usuario escribe en el input → (onChange) actualiza title
+Clic en “Add” o Enter → (onSubmit) valida:
+  - vacío → muestra error
+  - válido → llama onAdd({ id, title, done:false })
+App actualiza la lista (setTodos) → la UI se refresca → aparece la nueva tarea
+TodoForm limpia el input y el error
+
+
+Flujo visual del FilterBar funcional:
+Usuario hace clic en “Active”
+→ onClick llama onFilterChange("active")
+→ App actualiza estado filter="active"
+→ App recalcula visibleTodos (solo pendientes)
+→ TodoList se actualiza en pantalla
