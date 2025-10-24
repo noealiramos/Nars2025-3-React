@@ -66,7 +66,7 @@ export default function App() {
   return (
     <main className="app">
       <h1>📝 To-Do List</h1>
-      <p style={{ opacity: 0.8, marginTop: 0 }}>Project scaffold ready.</p>
+      <p style={{ opacity: 0.8, marginTop: 0 }}>Project NARSTASK ready</p>
 
       <div style={{ height: 12 }} />
 
