@@ -1,0 +1,9 @@
+.error-container {
+  text-align: "center";
+  padding: "48px";
+  background: "var(--surface)";
+  border-radius: "var(--radius)";
+  border: "1px solid var(--border)";
+  color: "var(--danger; #e53e3e)";
+  font-weight: 500;
+}
