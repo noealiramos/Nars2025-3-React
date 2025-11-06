@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Icon from "../../components/common/Icon/Icon";
 import { useCart } from "../../context/CartContext";
 import { useTheme } from "../../context/ThemeContext";
@@ -15,6 +15,7 @@ export default function Header() {
   const { isDarkMode, toggleTheme } = useTheme();
   const { getTotalItems } = useCart();
   const totalItems = getTotalItems();
+  const navigate = useNavigate();
 
   // Simular estado de autenticación - reemplazar con tu lógica real
   const [isAuth, setIsAuth] = useState(true);
@@ -89,9 +90,14 @@ export default function Header() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      console.log("Buscando:", searchQuery);
-      setIsMobileSearchOpen(false);
+
+    setIsMobileSearchOpen(false);
+    setIsMobileMenuOpen(false);
+
+    if (searchQuery.trim() === 0) {
+      navigate("/search");
+    } else {
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 
@@ -168,7 +174,10 @@ export default function Header() {
                 className="mobile-search-input"
                 placeholder="Buscar productos..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setSearchQuery(e.target.value);
+                }}
               />
               <button
                 type="submit"
@@ -207,7 +216,10 @@ export default function Header() {
                   className="search-input"
                   placeholder="Buscar productos..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    setSearchQuery(e.target.value);
+                  }}
                 />
                 <button
                   type="submit"
