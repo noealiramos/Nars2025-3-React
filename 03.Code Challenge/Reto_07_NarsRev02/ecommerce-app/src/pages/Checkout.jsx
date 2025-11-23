@@ -1,103 +1,124 @@
-// src/pages/Checkout.jsx
-import React from "react";
-import { CheckoutProvider, useCheckout } from "../context/CheckoutContext";
+import { useEffect, useState } from "react";
 import AddressForm from "../components/Checkout/Address/AddressForm";
-import PaymentForm from "../components/Checkout/Payment/PaymentForm";
-import SectionTitle from "../components/Checkout/shared/SectionTitle";
+import AddressList from "../components/Checkout/Address/AddressList";
+import SummarySection from "../components/Checkout/shared/SummarySection";
+import ErrorMessage from "../components/common/ErrorMessage/ErrorMessage";
+import Loading from "../components/common/Loading/Loading";
+import {
+  getDefaultPaymentMethods,
+  getPaymentMethods,
+} from "../services/paymentService";
+import {
+  getDefaultShippingAddress,
+  getShippingAddresses,
+} from "../services/shippingService";
 
-function CheckoutInner() {
-  const {
-    addresses, payments,
-    selectedAddress, selectedPayment,
-    setSelectedAddress, setSelectedPayment,
-    addAddress, addPayment
-  } = useCheckout();
+export default function Checkout() {
+  const [addresses, setAddresses] = useState([]);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [payments, setPayments] = useState([]);
+  const [selectedPayment, setSelectedPayment] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const [showAddrForm, setShowAddrForm] = React.useState(false);
-  const [showPayForm, setShowPayForm] = React.useState(false);
+  async function loadData() {
+    setLoading(true);
+    setError(null);
+    try {
+      const [addrList, payList, defaultAdd, defaultPay] = await Promise.all([
+        getShippingAddresses(),
+        getPaymentMethods(),
+        getDefaultShippingAddress(),
+        getDefaultPaymentMethods(),
+      ]);
 
-  return (
-    <div className="max-w-4xl mx-auto p-4 space-y-8">
-      <section>
-        <SectionTitle
-          title="Direcciones"
-          right={
-            <button
-              className="rounded-xl border px-3 py-2"
-              onClick={() => setShowAddrForm(v => !v)}
-            >
-              {showAddrForm ? "Cerrar" : "Agregar dirección"}
-            </button>
-          }
-        />
-        {!showAddrForm ? (
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {addresses.map(a => (
-              <li key={a.id}>
-                <button
-                  onClick={() => setSelectedAddress(a.id)}
-                  className={`w-full text-left rounded-xl border p-3 hover:bg-gray-50 ${selectedAddress === a.id ? "ring-2 ring-indigo-500" : ""}`}
-                >
-                  <div className="font-medium">
-                    {a.name} {a.default && <span className="ml-2 text-xs text-indigo-600">Predeterminada</span>}
-                  </div>
-                  <div className="text-sm text-gray-600">{a.address1}</div>
-                  <div className="text-sm text-gray-600">{a.city}, {a.postalCode}</div>
-                </button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <AddressForm
-            onCancel={() => setShowAddrForm(false)}
-            onSave={(addr) => { addAddress(addr); setShowAddrForm(false); }}
-          />
-        )}
-      </section>
+      setAddresses(addrList || []);
 
-      <section>
-        <SectionTitle
-          title="Métodos de pago"
-          right={
-            <button
-              className="rounded-xl border px-3 py-2"
-              onClick={() => setShowPayForm(v => !v)}
-            >
-              {showPayForm ? "Cerrar" : "Agregar método"}
-            </button>
-          }
-        />
-        {!showPayForm ? (
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {payments.map(p => (
-              <li key={p.id}>
-                <button
-                  onClick={() => setSelectedPayment(p.id)}
-                  className={`w-full text-left rounded-xl border p-3 hover:bg-gray-50 ${selectedPayment === p.id ? "ring-2 ring-indigo-500" : ""}`}
-                >
-                  <div className="font-medium">
-                    {p.brand} •••• {p.last4} {p.default && <span className="ml-2 text-xs text-indigo-600">Predeterminada</span>}
-                  </div>
-                  <div className="text-sm text-gray-600">{p.masked}</div>
-                </button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <PaymentForm
-            onCancel={() => setShowPayForm(false)}
-            onSave={(pmt) => { addPayment(pmt); setShowPayForm(false); }}
-          />
-        )}
-      </section>
+      const normalizedPayments = (payList || []).map((p) => ({
+        id: p._id || Date.now().toString(),
+        alias: p.alias || `Tarjeta ****${(p.cardNumber || "").slice(-4)}`,
+        cardNumber: p.cardNumber || "",
+        placeHolder: p.placeHolder || "",
+        expiryDate: p.expiryDate || "",
+        isDefault: p.isDefault || false,
+      }));
+      setPayments(payList || []);
+      setSelectedAddress(defaultAdd);
+      setSelectedPayment(defaultPay);
+    } catch (err) {
+      setError("No se pudieron cargar las direcciones o métodos de pago");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    let mounted = true;
+    if (mounted) loadData();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const handleAddressSubmit = (formData) => {
+    console.log(formData);
+  };
+  const handlePaymentSubmit = (formData) => {
+    console.log(formData);
+  };
+  const handleAddressEdit = (address) => {
+    console.log(address);
+  };
+  const handlePaymentEdit = (payment) => {
+    console.log(payment);
+  };
+
+  return loading ? (
+    <div className="checkout-loading">
+      <Loading>
+        <p>Cargando direcciones y métodos de pago</p>
+      </Loading>
     </div>
-  );
-}
-
-export default function CheckoutPage() {
-  return (
-    <CheckoutProvider>
-      <CheckoutInner />
-    </CheckoutProvider>
+  ) : error ? (
+    <ErrorMessage>{error}</ErrorMessage>
+  ) : (
+    <div className="checkout-container">
+      <div className="checkout-left">
+        <SummarySection
+          title="1. Dirección de envío"
+          selected={selectedAddress}
+          summaryContent={
+            <div className="selected-address">
+              <p>{selectedAddress?.name}</p>
+              <p>{selectedAddress?.address1}</p>
+              <p>
+                {selectedAddress?.city}, {selectedAddress?.postalCode}
+              </p>
+            </div>
+          }
+          isExpanded={false}
+          onToggle={() => {
+            console.log(`Expand ${selectedAddress}`);
+          }}
+        >
+          <AddressList
+            addresses={addresses}
+            selectedAddress={selectedAddress}
+            onSelect={(address) => {
+              setSelectedAddress(address);
+            }}
+            onEdit={handleAddressEdit}
+            onAdd={() => console.log("Add address")}
+          ></AddressList>
+          <AddressForm
+            onSubmit={handleAddressSubmit}
+            initialValues={null}
+            isEdit={false}
+          ></AddressForm>
+        </SummarySection>
+      </div>
+      <div className="checkout-right"></div>
+    </div>
   );
 }
