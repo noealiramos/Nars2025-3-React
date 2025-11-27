@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CartView from "../components/Cart/CartView";
 import AddressForm from "../components/Checkout/Address/AddressForm";
 import AddressList from "../components/Checkout/Address/AddressList";
+import PaymentForm from "../components/Checkout/Payment/PaymentForm";
+import PaymentList from "../components/Checkout/Payment/PaymentList";
 import SummarySection from "../components/Checkout/shared/SummarySection";
 import Button from "../components/common/Button";
 import ErrorMessage from "../components/common/ErrorMessage/ErrorMessage";
@@ -18,19 +21,31 @@ import {
 import "./Checkout.css";
 
 export default function Checkout() {
+  const navigate = useNavigate();
+  // Contexto global del carrito
   const { cartItems, total, clearCart } = useCart();
 
+  // Estados para direcciones y métodos de pago
   const [addresses, setAddresses] = useState([]);
-  const [selectedAddress, setSelectedAddress] = useState(null);
   const [payments, setPayments] = useState([]);
-  const [selectedPayment, setSelectedPayment] = useState(null);
+
+  // Estados para control de componentes
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Control visual del control de direcciones
+  // Estados para mantener el valor de las dirección o método de pago seleccionado
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [selectedPayment, setSelectedPayment] = useState(null);
+
+  // Control visual del componente de direcciones
   const [showAddressForm, setShowAddressForm] = useState(false);
   const [addressSectionOpen, setAddressSectionOpen] = useState(false);
-  const [editingAddres, setEditingAddres] = useState(null);
+  const [editingAddress, setEditingAddress] = useState(null);
+
+  // Control visual del componente de métodos de pago
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [paymentSectionOpen, setPaymentSectionOpen] = useState(false);
+  const [editingPayment, setEditingPayment] = useState(null);
 
   async function loadData() {
     setLoading(true);
@@ -53,6 +68,7 @@ export default function Checkout() {
         expiryDate: p.expiryDate || "",
         isDefault: p.isDefault || false,
       }));
+
       setPayments(payList || []);
       setSelectedAddress(defaultAdd);
       setSelectedPayment(defaultPay);
@@ -74,51 +90,117 @@ export default function Checkout() {
 
   const handleAddressToggle = () => {
     setShowAddressForm(false);
-    setEditingAddres(null);
+    setEditingAddress(null);
     setAddressSectionOpen((prev) => !prev);
   };
 
   const handleSelectAddress = (address) => {
     setSelectedAddress(address);
     setShowAddressForm(false);
-    setEditingAddres(null);
+    setEditingAddress(null);
     setAddressSectionOpen(false);
   };
 
   const handleAddressNew = () => {
     setShowAddressForm(true);
-    setEditingAddres(null);
+    setEditingAddress(null);
     setAddressSectionOpen(true);
   };
 
   const handleAddressEdit = (address) => {
     setShowAddressForm(true);
-    setEditingAddres(address);
+    setEditingAddress(address);
     setAddressSectionOpen(true);
+  };
+
+  const handleAddressDelete = (address) => {
+    let updatedAddressess = addresses.filter((add) => add._id !== address._id);
+
+    if (selectedAddress._id === address._id && updatedAddressess.length > 0) {
+      selectedAddress(updatedAddressess[0]);
+    } else {
+      selectedAddress(null);
+    }
+    setAddresses(updatedAddressess);
   };
 
   const handleAddressSubmit = (formData) => {
     console.log(formData);
+    let item = null;
+    let updatedItems = [];
+    if (editingAddress) {
+      item = { ...formData };
+      updatedItems = addresses.map((address) => {
+        if (address._id === item._id) {
+          address = item;
+        }
+      });
+    } else {
+      item = { _id: new Date(), ...formData };
+      updatedItems = [...addresses, item];
+    }
+    setAddresses(updatedItems);
   };
 
   const handleCancelForm = () => {
     setShowAddressForm(false);
-    setEditingAddres(null);
+    setEditingAddress(null);
     setAddressSectionOpen(true);
+  };
+
+  const handlePaymentToggle = () => {
+    setShowPaymentForm(false);
+    setEditingPayment(null);
+    setPaymentSectionOpen((prev) => !prev);
+  };
+
+  const handleSelectPayment = (payment) => {
+    setSelectedPayment(payment);
+    setShowPaymentForm(false);
+    setEditingPayment(null);
+    setPaymentSectionOpen(false);
+  };
+
+  const handlePaymentNew = () => {
+    setShowPaymentForm(true);
+    setEditingPayment(null);
+    setPaymentSectionOpen(true);
+  };
+
+  const handlePaymentEdit = (payment) => {
+    setShowPaymentForm(true);
+    setEditingPayment(payment);
+    setPaymentSectionOpen(true);
+  };
+
+  const handlePaymentDelete = (payment) => {
+    let updatedPayments = payments.filter((add) => add._id !== payment._id);
+
+    if (selectedPayment._id === payment._id && updatedPayments.length > 0) {
+      selectedPayment(updatedPayments[0]);
+    } else {
+      selectedPayment(null);
+    }
+    setPayments(updatedPayments);
   };
 
   const handlePaymentSubmit = (formData) => {
     console.log(formData);
   };
 
+const formatMoney = (value)=>
+  new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN"}).format 
+  (value); 
 
+const subtotal = typeof total === "number"? total:0;
+const TAX_RATE=0.16;
+const SHIPPING_RATE= 350;
+const FREE_SHIPPING_THRESHOLD=1000;
 
-  const handlePaymentEdit = (payment) => {
-    console.log(payment);
-  };
+const taxAmount = parseFloat((subtotal*TAX_RATE).toFixed(2));
+const shippingCost = subtotal>= FREE_SHIPPING_THRESHOLD?0:SHIPPING_RATE;
+const grantotal = parseFloat((subtotal+taxAmount+shippingCost).toFixed(2));
 
-
-  
   const handleCreateOrder = () => {};
 
   return loading ? (
@@ -147,24 +229,56 @@ export default function Checkout() {
           isExpanded={showAddressForm || addressSectionOpen || !selectedAddress}
           onToggle={handleAddressToggle}
         >
-          {!showAddressForm && !editingAddres ? (
+          {!showAddressForm && !editingAddress ? (
             <AddressList
               addresses={addresses}
               selectedAddress={selectedAddress}
               onSelect={(address) => handleSelectAddress(address)}
               onEdit={(address) => handleAddressEdit(address)}
               onAdd={handleAddressNew}
-              onDelete={handleAddressDelete}
+              onDelete={(address) => handleAddressDelete(address)}
             ></AddressList>
           ) : (
             <AddressForm
               onSubmit={handleAddressSubmit}
               onCancel={handleCancelForm}
-              initialValues={editingAddres || {}}
-              isEdit={!!editingAddres}
+              initialValues={editingAddress || {}}
+              isEdit={!!editingAddress}
             ></AddressForm>
           )}
         </SummarySection>
+
+        <SummarySection
+          title="2. Método de pago"
+          selected={selectedPayment}
+          summaryContent={
+            <div className="selected-payment">
+              <p>{selectedPayment?.alias}</p>
+              <p>{selectedPayment?.cardNumber?.slice(-4) || "----"}</p>
+            </div>
+          }
+          onToggle={handlePaymentToggle}
+          isExpanded={showPaymentForm || paymentSectionOpen || !selectedPayment}
+        >
+          {!showPaymentForm && !editingPayment}?(
+          <PaymentList
+            payments={payments}
+            selectedPayment={selectedPayment}
+            onSelect={(payment) => handleSelectPayment(payment)}
+            onDelete={(payment) => handlePaymentDelete(payment)}
+            onAdd={handlePaymentNew}
+            onEdit={(payment) => handlePaymentEdit(payment)}
+          ></PaymentList>
+          ):(
+          <PaymentForm
+            onSubmit={handlePaymentSubmit}
+            onCancel={handleCancelForm}
+            initialValues={editingPayment || {}}
+            isEdit={!!editingPayment}
+          ></PaymentForm>
+          )
+        </SummarySection>
+
         <SummarySection
           title="3. Revisa tu pedido"
           selected={true}
@@ -187,16 +301,16 @@ export default function Checkout() {
             </p>
             <div className="order-costs">
               <p>
-                <strong>Subtotal:</strong>$0.00
+                <strong>Subtotal:</strong>{formatMoney(subtotal)}
               </p>
               <p>
-                <strong>IVA (16%):</strong>$0.00
+                <strong>IVA (16%):</strong>{formatMoney(taxAmount)}
               </p>
               <p>
-                <strong>Envío:</strong>$0.00
+                <strong>Envío:</strong>{formatMoney(shippingCost)}
               </p>
               <p>
-                <strong>Total:</strong>$0.00
+                <strong>Total:</strong>{formatMoney(grantotal)}
               </p>
               <p>
                 <strong>Fecha estimada de entrega:</strong>
