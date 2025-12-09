@@ -111,4 +111,4 @@ El proyecto cumple los puntos clave de la rúbrica:
 
 ---
 
-Listo para evaluación ✔️
+
